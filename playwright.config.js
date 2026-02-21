@@ -1,15 +1,14 @@
 // @ts-check
 import { defineConfig, devices } from "@playwright/test";
 
-
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
 const config = {
   testDir: "./tests",
-  timeout: 40 * 1000,
+  timeout: 30 * 1000,
   expect: {
-    timeout: 40 * 1000,
+    timeout: 5000,
   },
 
   reporter: "html",
@@ -19,9 +18,8 @@ const config = {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
-    browserName: "firefox",
+    browserName: "webkit",
     headless: false,
-     
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
   },
