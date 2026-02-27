@@ -38,7 +38,7 @@ test("Browser Context Playwright Test", async ({ browser }) => {
   console.log(allTitles);
 });
 
-test.only("Page Playwright Test", async ({ page }) => {
+test("Page Playwright Test", async ({ page }) => {
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
   const userName = page.locator("#username");
   const signInBtn = page.locator("#signInBtn");
@@ -55,4 +55,25 @@ test.only("Page Playwright Test", async ({ page }) => {
   expect(await page.locator("#terms").isChecked()).toBeFalsy();
   await expect(documentLocator).toHaveAttribute("class", "blinkingText");
   //await page.pause();
+});
+
+test.only("Child Windows Handle", async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const userName = page.locator("#username");
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+  const documentLocator = page.locator("[href  *= 'documents-request' ]");
+
+  const [newPage] = await Promise.all([
+    context.waitForEvent("page"), //listen to the new page event
+    documentLocator.click(),
+  ]); // new page is opened
+
+  const text = await newPage.locator(".red").textContent();
+  const arrayText = text.split("@");
+  const email = arrayText[1].split(" ")[0];
+  console.log(email);
+  await page.locator("#username").type(email);
+  await page.pause();
+  console.log(await page.locator("#username").textContent());
 });
