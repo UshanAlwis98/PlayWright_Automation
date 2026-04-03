@@ -38,7 +38,7 @@ test("Browser Context Playwright Test", async ({ browser }) => {
   console.log(allTitles);
 });
 
-test.only("Page Playwright Test", async ({ page }) => {
+test("Page Playwright Test", async ({ page }) => {
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
   const userName = page.locator("#username");
   const signInBtn = page.locator("#signInBtn");
@@ -57,7 +57,7 @@ test.only("Page Playwright Test", async ({ page }) => {
   //await page.pause();
 });
 
-test("Child Windows Handle", async ({ browser }) => {
+test.only("Child Windows Handle", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
   const userName = page.locator("#username");
