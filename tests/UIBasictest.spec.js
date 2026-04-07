@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
-test("Browser Context Playwright Test", async ({ browser }) => {
+test.only("Browser Context Playwright Test", async ({ browser }) => {
   // Chrome - plugins/cookies
 
   const context = await browser.newContext();
@@ -57,7 +57,7 @@ test("Page Playwright Test", async ({ page }) => {
   //await page.pause();
 });
 
-test.only("Child Windows Handle", async ({ browser }) => {
+test("Child Windows Handle", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
   const userName = page.locator("#username");
