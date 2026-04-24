@@ -26,23 +26,3 @@ test("Browser Context Playwright Test", async ({ browser }) => {
 
   console.log(await courseTitles.allTextContents());
 });
-
-test.only("Browser Context Playwright Test 2", async ({ page }) => {
-  const url = await page.goto(
-    "https://rahulshettyacademy.com/client/#/auth/login",
-  );
-  console.log("Page title:", await page.title());
-  const username = page.locator("#userEmail");
-  const password = page.locator("#userPassword");
-  const loginButton = page.locator("#login");
-
-  await username.fill("ushanloshitha@gmail.com");
-  await password.fill("password");
-  await loginButton.click();
-
-  const text = await page.locator("h5 b").first().textContent();
-  console.log(text);
-
-  const allTexts = await page.locator("h5 b").allTextContents();
-  console.log(allTexts);
-});
