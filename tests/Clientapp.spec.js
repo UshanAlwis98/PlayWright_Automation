@@ -11,6 +11,8 @@ test("Browser Context Playwright Test 2", async ({ page }) => {
   const dropdown = page.locator("select.form-control");
   const radioButtons = page.locator(".radiotextsty");
   const dialogBox = page.locator("#okayBtn");
+  const termsCheckbox = page.locator("#terms");
+  const documentsLink = page.locator("a[href*='documents-request']");
   const loginButton = page.locator("#signInBtn");
 
   // await username.fill("ushanloshitha@gmail.com");
@@ -28,5 +30,20 @@ test("Browser Context Playwright Test 2", async ({ page }) => {
   await expect(await radioButtons.last()).toBeChecked();
   console.log(await radioButtons.last().isChecked());
 
-  await page.pause();
+  await termsCheckbox.check();
+  await expect(termsCheckbox).toBeChecked();
+
+  await termsCheckbox.uncheck();
+  expect(await termsCheckbox.isChecked()).toBeFalsy();
+
+  await expect(documentsLink).toHaveAttribute("class", "blinkingText");
+});
+
+test("Browser Context Playwright Test 3", async ({ page }) => {
+  const url = await page.goto(
+    "https://rahulshettyacademy.com/loginpagePractise/",
+  );
+
+  const documentsLink = page.locator("a[href*='documents-request']");
+  documentsLink.click();
 });
