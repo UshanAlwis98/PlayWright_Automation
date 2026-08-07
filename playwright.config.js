@@ -1,10 +1,10 @@
 // @ts-check
-import { defineConfig, devices } from "@playwright/test";
+const { defineConfig, devices } = require("@playwright/test");
 
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const config = {
+module.exports = defineConfig({
   testDir: "./tests",
   timeout: 50 * 1000,
   expect: {
@@ -18,11 +18,23 @@ const config = {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
-    browserName: "webkit",
     headless: false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
   },
-};
 
-module.exports = config;
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
+  ],
+});
