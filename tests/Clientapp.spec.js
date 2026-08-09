@@ -7,6 +7,7 @@ test("Rahul Shetty Academy Login Test", async ({ browser }) => {
   const Username = page.locator('input[name="username"]');
   const Password = page.locator('input[name="password"]');
   const SignInButton = page.locator('input[type="submit"]');
+  const CardTitles = page.locator(".card-body a");
 
   await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 
@@ -25,5 +26,6 @@ test("Rahul Shetty Academy Login Test", async ({ browser }) => {
   await Password.fill("Learning@830$3mK2");
   await SignInButton.click();
 
-  console.log(await page.locator("div.card-body a").nth(0).textContent());
+  // console.log(await CardTitles.nth(1).textContent());
+  console.log(await CardTitles.allTextContents());
 });
