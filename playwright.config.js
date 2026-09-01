@@ -11,7 +11,10 @@ module.exports = defineConfig({
     timeout: 9000,
   },
 
-  reporter: "html",
+  reporter: [
+    ["html", { outputFolder: "playwright-report", open: "never" }],
+    ["allure-playwright", { resultsDir: "allure-results" }],
+  ],
   /* Run tests in files in parallel */
 
   use: {
@@ -35,6 +38,14 @@ module.exports = defineConfig({
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
+    },
+    {
+      name: "Mobile Chrome",
+      use: { ...devices["Pixel 5"] },
+    },
+    {
+      name: "Mobile Safari",
+      use: { ...devices["iPhone 12"] },
     },
   ],
 });
