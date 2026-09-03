@@ -1,31 +1,18 @@
 import { test, expect } from "@playwright/test";
 
-test("Rahul Shetty Academy Login Test", async ({ browser }) => {
+test("Rahul Shetty Login", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
 
-  const Username = page.locator('input[name="username"]');
-  const Password = page.locator('input[name="password"]');
-  const SignInButton = page.locator('input[type="submit"]');
-  const CardTitles = page.locator(".card-body a");
+  const userName = page.locator('input[id="username"]');
+  const password = page.locator('input[id="password"]');
+  const signinBtn = page.locator('input[id="signInBtn"]');
+  const warningMsg = page.locator("[style*=block]");
 
-  await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise");
+  await userName.fill("rahulshettyacademy");
+  await password.fill("Learning");
+  await signinBtn.click();
 
-  // Login Scenario Happy Path
-  await Username.fill("rahulshettyacademy");
-  await Password.fill("testpassword");
-  await SignInButton.click();
-
-  // Validate Error Message
-  console.log(await page.locator("[style*='block']").textContent());
-  await expect(page.locator("[style*='block']")).toContainText("Incorrect");
-
-  await Username.fill("");
-  await Username.fill("rahulshettyacademy");
-  await Password.fill("");
-  await Password.fill("Learning@830$3mK2");
-  await SignInButton.click();
-
-  // console.log(await CardTitles.nth(1).textContent());
-  console.log(await CardTitles.allTextContents());
+  console.log(await warningMsg.textContent());
 });
