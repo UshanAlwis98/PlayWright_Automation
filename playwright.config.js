@@ -12,7 +12,7 @@ module.exports = defineConfig({
   },
 
   reporter: [
-    ["html", { outputFolder: "playwright-report", open: "never" }],
+    //["html", { outputFolder: "playwright-report", open: "never" }],
     ["allure-playwright", { resultsDir: "allure-results" }],
   ],
   /* Run tests in files in parallel */

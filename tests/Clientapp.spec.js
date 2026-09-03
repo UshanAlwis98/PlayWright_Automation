@@ -8,6 +8,7 @@ test("Rahul Shetty Login", async ({ browser }) => {
   const password = page.locator('input[id="password"]');
   const signinBtn = page.locator('input[id="signInBtn"]');
   const warningMsg = page.locator("[style*=block]");
+  const cardbodies = page.locator(".card-body a");
 
   await page.goto("https://rahulshettyacademy.com/loginpagePractise");
   await userName.fill("rahulshettyacademy");
@@ -15,4 +16,13 @@ test("Rahul Shetty Login", async ({ browser }) => {
   await signinBtn.click();
 
   console.log(await warningMsg.textContent());
+  await expect(warningMsg).toContainText("Incorrect");
+
+  //Successful Login Scenario
+
+  await password.fill("Learning@830$3mK2");
+  await signinBtn.click();
+
+  console.log(await cardbodies.nth(0).textContent());
+  console.log(await cardbodies.allTextContents());
 });
