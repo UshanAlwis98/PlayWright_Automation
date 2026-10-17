@@ -15,6 +15,7 @@ test("Login Revision Test", async ({ browser }) => {
 
   const CardTitles = page.locator(".card-body b");
 
-  console.log(await CardTitles.nth(0).textContent());
+  // console.log(await CardTitles.nth(0).textContent());
+  await page.waitForLoadState("networkidle");
   console.log(await CardTitles.allTextContents());
 });
