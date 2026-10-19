@@ -35,7 +35,8 @@ test.only("UI Test", async ({ page }) => {
   const dropdown = page.locator("select.form-control");
   const radiobtn = page.locator(".radiotextsty");
   const popupbox = page.locator("#okayBtn");
-
+  const checkbox = page.locator("#terms");
+  const documentLink = page.locator("[href *= 'documents-request']");
   await page.goto("https://rahulshettyacademy.com/loginpagePractise");
 
   await userName.fill("rahulshettyacademy");
@@ -43,8 +44,14 @@ test.only("UI Test", async ({ page }) => {
   await page.pause();
   await dropdown.selectOption("teach");
   await radiobtn.last().click();
+  await expect(radiobtn.last()).toBeChecked();
+  // console.log(await radiobtn.last().isChecked);
   await popupbox.click();
-
+  await checkbox.click();
+  await expect(checkbox).toBeChecked();
+  await checkbox.uncheck();
+  expect(await checkbox.isChecked()).toBeFalsy();
+  await expect(documentLink).toHaveAttribute("class", "blinkingText");
   await signinBtn.click();
   console.log(await cardbodies.nth(0).textContent());
 });
