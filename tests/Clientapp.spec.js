@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { text } from "node:stream/consumers";
 
 test("Rahul Shetty Login", async ({ browser }) => {
   const context = await browser.newContext();
@@ -27,7 +28,7 @@ test("Rahul Shetty Login", async ({ browser }) => {
   console.log(await cardbodies.allTextContents());
 });
 
-test.only("UI Test", async ({ page }) => {
+test("UI Test", async ({ page }) => {
   const userName = page.locator('input[id="username"]');
   const password = page.locator('input[id="password"]');
   const signinBtn = page.locator('input[id="signInBtn"]');
@@ -54,4 +55,19 @@ test.only("UI Test", async ({ page }) => {
   await expect(documentLink).toHaveAttribute("class", "blinkingText");
   await signinBtn.click();
   console.log(await cardbodies.nth(0).textContent());
+});
+
+test.only("Child Window handle", async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const documentLink = page.locator("[href *= 'documents-request']");
+  await page.goto("https://rahulshettyacademy.com/loginpagePractise");
+
+  const [newPage] = Promise.all([
+    context.waitForEvent("page"),
+    documentLink.click(),
+  ]);
+
+  text = await newPage.locator(".red").textContent();
+  console.log(text);
 });
