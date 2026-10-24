@@ -75,6 +75,7 @@ test.only("Child Window handle", async ({ browser }) => {
   const arrayText = text.split("@");
   const domain = arrayText[1].split(" ")[0];
 
-  console.log(domain);
+  // console.log(domain);
   await userName.fill(domain);
+  console.log(await userName.inputValue());
 });
