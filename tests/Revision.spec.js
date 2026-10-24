@@ -9,6 +9,7 @@ test("Login Revision Test", async ({ browser }) => {
   const LoginButton = page.locator("input[id='login']");
   const CardTitles = page.locator(".card-body b");
   const Products = page.locator(".card-body");
+  const Productname = "iphone 13 pro";
   await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
   page.pause();
   await Useremail.fill("ushanloshitha@gmail.com");
@@ -18,5 +19,14 @@ test("Login Revision Test", async ({ browser }) => {
   // console.log(await CardTitles.nth(0).textContent());
   await page.waitForLoadState("networkidle");
   console.log(await CardTitles.allTextContents());
-  console.log(Products.count());
+  const Productcount = await Products.count();
+  console.log(Productcount);
+
+  for (let i = 0; i < Productcount; ++i) {
+    if (
+      (await Productcount.nth(i).locator("b").textContent()) === "Productname"
+    ) {
+      console.log("Your Desired Product is right");
+    }
+  }
 });
