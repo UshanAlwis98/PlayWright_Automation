@@ -60,14 +60,21 @@ test("UI Test", async ({ page }) => {
 test.only("Child Window handle", async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
+  const userName = page.locator('input[id="username"]');
+  const password = page.locator('input[id="password"]');
+  const signinBtn = page.locator('input[id="signInBtn"]');
   const documentLink = page.locator("[href *= 'documents-request']");
   await page.goto("https://rahulshettyacademy.com/loginpagePractise");
-
-  const [newPage] = Promise.all([
+  page.pause();
+  const [newPage] = await Promise.all([
     context.waitForEvent("page"),
     documentLink.click(),
   ]);
 
-  text = await newPage.locator(".red").textContent();
-  console.log(text);
+  const text = await newPage.locator(".red").textContent();
+  const arrayText = text.split("@");
+  const domain = arrayText[1].split(" ")[0];
+
+  console.log(domain);
+  await userName.fill(domain);
 });
