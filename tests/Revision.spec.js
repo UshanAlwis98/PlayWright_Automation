@@ -23,10 +23,9 @@ test("Login Revision Test", async ({ browser }) => {
   console.log(Productcount);
 
   for (let i = 0; i < Productcount; ++i) {
-    if (
-      (await Productcount.nth(i).locator("b").textContent()) === "Productname"
-    ) {
+    if ((await Products.nth(i).locator("b").textContent()) === Productname) {
       console.log("Your Desired Product is right");
+      //  await Products.nth(i).locator("");
     }
   }
 });
