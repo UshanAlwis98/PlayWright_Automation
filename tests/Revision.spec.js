@@ -11,7 +11,7 @@ test("Login Revision Test", async ({ browser }) => {
   const Products = page.locator(".card-body");
   const Productname = "iphone 13 pro";
   await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
-  page.pause();
+  await page.pause();
   await Useremail.fill("ushanloshitha@gmail.com");
   await Password.fill("1998");
   await LoginButton.click();
@@ -24,8 +24,9 @@ test("Login Revision Test", async ({ browser }) => {
 
   for (let i = 0; i < Productcount; ++i) {
     if ((await Products.nth(i).locator("b").textContent()) === Productname) {
-      console.log("Your Desired Product is right");
-      //  await Products.nth(i).locator("");
+      // console.log("Your Desired Product is right");
+      await Products.nth(i).locator("text=Add To Cart").click();
+      break;
     }
   }
 });
